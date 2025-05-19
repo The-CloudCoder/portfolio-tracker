@@ -1,0 +1,11 @@
+export interface StockData {
+    stockName: string;
+    purchasePrice: number;
+    quantity: number;
+    exchange: 'NSE' | 'BSE';
+    sector: string;
+    cmp?: number;
+    peRatio?: number;
+    latestEarnings?: number;
+  }
+  

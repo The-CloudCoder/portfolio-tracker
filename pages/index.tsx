@@ -2,6 +2,7 @@ import Head from 'next/head';
 import PortfolioTable from '../components/PortfolioTable';
 
 export default function Home() {
+
   return (
     <>
       <Head>

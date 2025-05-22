@@ -4,14 +4,24 @@ import classNames from 'classnames';
 
 const MOCK_PORTFOLIO: StockData[] = [
   {
-    stockName: 'TCS',
+    stockName: 'TCS.NS',
+    stockGoogle: 'TCS',
     purchasePrice: 3000,
     quantity: 10,
     exchange: 'NSE',
     sector: 'Technology',
   },
   {
-    stockName: 'HDFC Bank',
+    stockName: 'INFY.NS',
+    stockGoogle: 'INFY',
+    purchasePrice: 1500,
+    quantity: 20,
+    exchange: 'NSE',
+    sector: 'Technology',
+  },
+    {
+    stockName: 'HDFCBANK.NS',
+    stockGoogle: 'HDFCBANK',
     purchasePrice: 1500,
     quantity: 20,
     exchange: 'NSE',
@@ -27,9 +37,9 @@ export default function PortfolioTable() {
       data.map(async (stock) => {
         const [cmpRes, googleRes] = await Promise.all([
           fetch(`/api/yahoo?symbol=${stock.stockName}`).then(res => res.json()),
-          fetch(`/api/google?symbol=${stock.stockName}`).then(res => res.json()),
+          fetch(`/api/google?symbol=${stock.stockGoogle}`).then(res => res.json()),
         ]);
-
+        
         return {
           ...stock,
           cmp: cmpRes.cmp,

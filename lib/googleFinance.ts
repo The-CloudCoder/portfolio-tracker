@@ -1,8 +1,19 @@
-export async function fetchGoogleFinanceData(symbol: string): Promise<{ peRatio: number; earnings: number }> {
-    // Replace with actual scraping/unofficial Google Finance method
-    return {
-      peRatio: +(Math.random() * 30).toFixed(2),
-      earnings: +(Math.random() * 500).toFixed(2),
-    };
+export async function fetchGoogleFinanceData(symbol: string): Promise<{ peRatio: number; earnings: number } | null> {
+  try {
+    const response = await fetch('https://script.google.com/macros/s/AKfycbz2_C-0-AT2NCTFVrCdo_rE1GhyZulOmH1Uh7KeyZqWhcXkc9ncofIZVCc7HCOt1G4/exec');
+    const stockData = await response.json();
+
+    const matched = stockData.find((stock: any) => stock.stockName.toLowerCase() === symbol.toLowerCase());
+
+    if (matched) {
+      return {
+        peRatio: matched.peRatio,
+        earnings: matched.eps
+      };
+    } else {
+      return null;
+    }
+  } catch (error) {
+    return null;
   }
-  
+}
